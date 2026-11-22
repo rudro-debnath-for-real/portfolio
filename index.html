@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rudro Debnath - CSE Student, Competitive Programmer, Developer | University of Global Village">
+    <meta name="theme-color" content="#0a0f1a">
+    <title>Rudro Debnath | CSE Student | Competitive Programmer | Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo" aria-label="Go to homepage">
+                <span class="logo-text">RD</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
+                <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+                <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+                <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+                <li><a href="#competitive" class="nav-link" data-section="competitive">Competitive</a></li>
+                <li><a href="#education" class="nav-link" data-section="education">Education</a></li>
+                <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" aria-pressed="false">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+    <!-- Main Content -->
+    <main id="main">
+        <!-- Hero Section -->
+        <section id="home" class="hero" aria-labelledby="hero-title">
+            <div class="hero-background">
+                <div class="grid-pattern"></div>
+                <div class="floating-elements" aria-hidden="true">
+                    <div class="float-element" data-speed="0.5"></div>
+                    <div class="float-element" data-speed="0.8"></div>
+                    <div class="float-element" data-speed="1.2"></div>
+                    <div class="float-element" data-speed="0.6"></div>
+                    <div class="float-element" data-speed="1"></div>
+                </div>
+            </div>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <p class="hero-greeting" aria-hidden="true">
+                        <span class="typing-text" id="typingText" aria-live="polite"></span>
+                    </p>
+                    <h1 id="hero-title" class="hero-name">
+                        Rudro Debnath
+                    </h1>
+                    <h2 class="hero-title">
+                        <span class="title-line">CSE Student</span>
+                        <span class="title-divider" aria-hidden="true"></span>
+                        <span class="title-line">Competitive Programmer</span>
+                        <span class="title-divider" aria-hidden="true"></span>
+                        <span class="title-line">Developer</span>
+                    </h2>
+                    <p class="hero-description">
+                        Passionate about solving complex algorithmic problems, building efficient software solutions,
+                        and continuously learning new technologies. Currently pursuing BSc in CSE at University of Global Village.
+                    </p>
+                    <div class="hero-stats" aria-label="Quick stats">
+                        <div class="stat">
+                            <span class="stat-value" data-count="3.83">0</span>
+                            <span class="stat-label">CGPA</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" data-count="2000+">0</span>
+                            <span class="stat-label">Problems Solved</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" data-count="15+">0</span>
+                            <span class="stat-label">Projects Built</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" data-count="4">0</span>
+                            <span class="stat-label">Languages</span>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary" aria-label="View my projects">
+                            <span class="btn-text">Explore My Work</span>
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary" aria-label="Contact me">
+                            <span class="btn-text">Contact Me</span>
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="hero-socials" aria-label="Social links">
+                        <a href="https://github.com/rudro-debnath-for-real" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://codeforces.com/profile/rudro1866" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Codeforces">
+                            <img src="photos/codeforces.svg" alt="Codeforces" class="social-logo-svg">
+                        </a>
+                        <a href="mailto:serenufa.ciba@ugv.edu.bd" class="social-link" aria-label="Email">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="code-window">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="code-title">solution.cpp</div>
+                        </div>
+                        <pre class="code-content"><code><span class="keyword">#include</span> <span class="string"><bits/stdc++.h></span>
+<span class="keyword">using namespace std;</span>
+
+<span class="keyword">class</span> <span class="class-name">Solution</span> {
+<span class="keyword">public</span>:
+    <span class="keyword">int</span> <span class="function">maxProfit</span>(<span class="keyword">vector</span><span class="keyword"><int></span>& prices) {
+        <span class="keyword">int</span> minPrice = <span class="keyword">INT_MAX</span>;
+        <span class="keyword">int</span> maxProfit = <span class="number">0</span>;
+
+        <span class="keyword">for</span> (<span class="keyword">int</span> price : prices) {
+            minPrice = <span class="keyword">min</span>(minPrice, price);
+            maxProfit = <span class="keyword">max</span>(maxProfit, price - minPrice);
+        }
+        <span class="keyword">return</span> maxProfit;
+    }
+};
+
+<span class="comment">// Time: O(n) | Space: O(1)</span>
+<span class="comment">// Greedy approach - track minimum</span></code></pre>
+                    </div>
+                </div>
+            </div>
+            <a href="#about" class="scroll-indicator" aria-label="Scroll to about section">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section about" aria-labelledby="about-title">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">About Me</span>
+                    <h2 id="about-title" class="section-title">Get to Know Me Better</h2>
+                    <div class="section-divider" aria-hidden="true"></div>
+                </header>
+                <div class="about-content">
+                    <div class="about-image" aria-hidden="true">
+                        <div class="image-frame">
+                            <img src="photos/profile.jpg" alt="Rudro Debnath - CSE Student and Developer" class="profile-photo" loading="eager">
+                        </div>
+                        <div class="experience-badge">
+                            <span class="badge-number">3+</span>
+                            <span class="badge-text">Years Coding</span>
+                        </div>
+                    </div>
+                    <div class="about-text">
+                        <p class="lead">
+                            I'm <strong>Rudro Debnath</strong>, a dedicated Computer Science and Engineering student at
+                            <strong>University of Global Village</strong> with a passion for competitive programming and software development.
+                        </p>
+                        <p>
+                            My journey in programming began with curiosity about how things work under the hood.
+                            Since then, I've developed a strong foundation in algorithms, data structures, and problem-solving
+                            through extensive practice on platforms like Codeforces. I enjoy tackling complex algorithmic challenges
+                            and translating them into efficient, clean code.
+                        </p>
+                        <p>
+                            Beyond competitive programming, I build practical applications using modern technologies.
+                            My projects range from desktop applications with Java and MySQL to web applications with
+                            HTML, CSS, and JavaScript. I believe in writing maintainable code and following best practices.
+                        </p>
+                        <div class="about-highlights">
+                            <div class="highlight-item">
+                                <div class="highlight-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="16 18 22 12 16 6"></polyline>
+                                        <polyline points="8 6 2 12 8 18"></polyline>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4>Problem Solving</h4>
+                                    <p>2000+ problems solved across platforms</p>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
+                                        <line x1="12" y1="22" x2="12" y2="15.5"></line>
+                                        <polyline points="22 8.5 12 15.5 2 8.5"></polyline>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4>Clean Code</h4>
+                                    <p>Focus on readability & maintainability</p>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4>Continuous Learning</h4>
+                                    <p>Always exploring new technologies</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">University</span>
+                                <span class="meta-value">University of Global Village</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Program</span>
+                                <span class="meta-value">BSc in CSE</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">CGPA</span>
+                                <span class="meta-value">3.83 / 4.00</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">HSC GPA</span>
+                                <span class="meta-value">4.84 / 5.00</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Graduation</span>
+                                <span class="meta-value">Expected 2029</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section skills" aria-labelledby="skills-title">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">Skills</span>
+                    <h2 id="skills-title" class="section-title">Technologies I Work With</h2>
+                    <div class="section-divider" aria-hidden="true"></div>
+                </header>
+                <div class="skills-grid">
+                    <div class="skill-category" data-category="programming">
+                        <div class="category-header">
+                            <div class="category-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Programming Languages</h3>
+                                <p class="category-count">3 Languages</p>
+                            </div>
+                        </div>
+                        <ul class="skill-list">
+                            <li class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">C++</span>
+                                    <span class="skill-proficiency">Advanced</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="90"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Java</span>
+                                    <span class="skill-proficiency">Intermediate</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="75"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Python</span>
+                                    <span class="skill-proficiency">Intermediate</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="70"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category" data-category="web">
+                        <div class="category-header">
+                            <div class="category-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="1" width="22" height="22" rx="2" ry="2"></rect>
+                                    <line x1="1" y1="12" x2="23" y2="12"></line>
+                                    <path d="M12 1v2m0 20v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m20 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Web Development</h3>
+                                <p class="category-count">3 Technologies</p>
+                            </div>
+                        </div>
+                        <ul class="skill-list">
+                            <li class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">HTML5</span>
+                                    <span class="skill-proficiency">Advanced</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="90"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">CSS3</span>
+                                    <span class="skill-proficiency">Advanced</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="85"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">JavaScript</span>
+                                    <span class="skill-proficiency">Intermediate</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="75"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category" data-category="database">
+                        <div class="category-header">
+                            <div class="category-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Database</h3>
+                                <p class="category-count">1 Technology</p>
+                            </div>
+                        </div>
+                        <ul class="skill-list">
+                            <li class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">MySQL</span>
+                                    <span class="skill-proficiency">Intermediate</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="70"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category" data-category="tools">
+                        <div class="category-header">
+                            <div class="category-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Tools & Platforms</h3>
+                                <p class="category-count">4 Tools</p>
+                            </div>
+                        </div>
+                        <ul class="skill-list">
+                            <li class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Git</span>
+                                    <span class="skill-proficiency">Proficient</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="85"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">GitHub</span>
+                                    <span class="skill-proficiency">Proficient</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="85"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">VS Code</span>
+                                    <span class="skill-proficiency">Advanced</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="90"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Sublime Text</span>
+                                    <span class="skill-proficiency">Intermediate</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="70"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section projects" aria-labelledby="projects-title">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">Projects</span>
+                    <h2 id="projects-title" class="section-title">Featured Projects</h2>
+                    <div class="section-divider" aria-hidden="true"></div>
+                </header>
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <article class="project-card" data-project="1">
+                        <div class="project-image">
+                            <img src="photos/doctor.jpg" alt="Doctor Appointment Management System - Screenshot of the Java desktop application" class="project-photo" loading="lazy">
+                            <div class="project-overlay">
+                                <a href="https://github.com/rudro-debnath-for-real" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View on GitHub">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                    <span>View Code</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <span class="project-type">Desktop Application</span>
+                                <span class="project-status">Completed</span>
+                            </div>
+                            <h3 class="project-title">Doctor Appointment Management System</h3>
+                            <p class="project-description">
+                                A comprehensive Java desktop application for managing doctor appointments, patient records,
+                                and scheduling. Features include patient registration, appointment booking, doctor availability
+                                management, and automated reminders with MySQL database integration.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Java</span>
+                                <span class="tag">MySQL</span>
+                                <span class="tag">Swing</span>
+                                <span class="tag">JDBC</span>
+                            </div>
+                            <a href="https://github.com/rudro-debnath-for-real" target="_blank" rel="noopener noreferrer" class="project-cta" aria-label="View Doctor Appointment System on GitHub">
+                                <span>View Repository</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="project-card" data-project="2">
+                        <div class="project-image">
+                            <img src="photos/course.png" alt="University Course Registration System - Screenshot of the Java desktop application" class="project-photo" loading="lazy">
+                            <div class="project-overlay">
+                                <a href="https://github.com/rudro-debnath-for-real" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View on GitHub">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                    <span>View Code</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <span class="project-type">Desktop Application</span>
+                                <span class="project-status">Completed</span>
+                            </div>
+                            <h3 class="project-title">University Course Registration System</h3>
+                            <p class="project-description">
+                                A Java-based course registration system for universities. Students can browse available courses,
+                                register for classes, view schedules, and manage prerequisites. Admins can manage courses,
+                                faculties, and generate reports. Built with MySQL for data persistence.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Java</span>
+                                <span class="tag">MySQL</span>
+                                <span class="tag">Swing</span>
+                                <span class="tag">JDBC</span>
+                            </div>
+                            <a href="https://github.com/rudro-debnath-for-real" target="_blank" rel="noopener noreferrer" class="project-cta" aria-label="View Course Registration System on GitHub">
+                                <span>View Repository</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="project-card" data-project="3">
+                        <div class="project-image">
+                            <img src="photos/cpp-library1.png" alt="Competitive Programming Code Library - Screenshot of C++ code templates and algorithms" class="project-photo" loading="lazy">
+                            <div class="project-overlay">
+                                <a href="https://github.com/rudro-debnath-for-real" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View on GitHub">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                    <span>View Code</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <span class="project-type">Code Library</span>
+                                <span class="project-status">Ongoing</span>
+                            </div>
+                            <h3 class="project-title">Competitive Programming Code Library</h3>
+                            <p class="project-description">
+                                A curated collection of competitive programming templates, algorithms, and data structures
+                                implemented in C++. Includes graph algorithms, dynamic programming patterns, segment trees,
+                                binary search variants, number theory, and geometry utilities for quick reference during contests.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">C++</span>
+                                <span class="tag">Algorithms</span>
+                                <span class="tag">Data Structures</span>
+                                <span class="tag">Templates</span>
+                            </div>
+                            <a href="https://github.com/rudro-debnath-for-real" target="_blank" rel="noopener noreferrer" class="project-cta" aria-label="View CP Library on GitHub">
+                                <span>View Repository</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Competitive Programming Section -->
+        <section id="competitive" class="section competitive" aria-labelledby="competitive-title">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">Competitive Programming</span>
+                    <h2 id="competitive-title" class="section-title">Algorithmic Problem Solving</h2>
+                    <div class="section-divider" aria-hidden="true"></div>
+                </header>
+                <div class="competitive-content">
+                    <div class="cp-profile">
+                        <div class="cp-card codeforces">
+                            <div class="cp-header">
+                                <div class="cp-icon" aria-hidden="true">
+                                    <img src="photos/codeforces.svg" alt="Codeforces" class="cp-logo-svg">
+                                </div>
+                                <div class="cp-info">
+                                    <h3>Codeforces</h3>
+                                    <div class="cp-handle-wrapper">
+                                        <span class="cp-handle">rudro1866</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cp-stats">
+                                <div class="cp-stat">
+                                    <span class="cp-stat-value">2000+</span>
+                                    <span class="cp-stat-label">Problems Solved</span>
+                                </div>
+                                <div class="cp-stat">
+                                    <span class="cp-stat-value">Multiple</span>
+                                    <span class="cp-stat-label">Platforms</span>
+                                </div>
+                                <div class="cp-stat">
+                                    <span class="cp-stat-value">rudro1866</span>
+                                    <span class="cp-stat-label">Codeforces Handle</span>
+                                </div>
+                            </div>
+                            <a href="https://codeforces.com/profile/rudro1866" target="_blank" rel="noopener noreferrer" class="cp-link">
+                                <span>View Profile</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div class="cp-card github">
+                            <div class="cp-header">
+                                <div class="cp-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </div>
+                                <div class="cp-info">
+                                    <h3>GitHub</h3>
+                                    <p class="cp-handle">@rudro-debnath-for-real</p>
+                                </div>
+                            </div>
+                            <div class="cp-stats">
+                                <div class="cp-stat">
+                                    <span class="cp-stat-value" data-count="15+">0</span>
+                                    <span class="cp-stat-label">Repositories</span>
+                                </div>
+                                <div class="cp-stat">
+                                    <span class="cp-stat-value" data-count="500+">0</span>
+                                    <span class="cp-stat-label">Commits</span>
+                                </div>
+                                <div class="cp-stat">
+                                    <span class="cp-stat-value" data-count="4">0</span>
+                                    <span class="cp-stat-label">Languages</span>
+                                </div>
+                                <div class="cp-stat">
+                                    <span class="cp-stat-value" data-count="10+">0</span>
+                                    <span class="cp-stat-label">Projects</span>
+                                </div>
+                            </div>
+                            <a href="https://github.com/rudro-debnath-for-real" target="_blank" rel="noopener noreferrer" class="cp-link">
+                                View Profile
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="cp-skills">
+                        <h3>Algorithmic Expertise</h3>
+                        <div class="cp-expertise-categories">
+                            <div class="expertise-category">
+                                <h4>Fundamentals</h4>
+                                <div class="expertise-tags">
+                                    <span class="expertise-tag">Time & Space Complexity</span>
+                                    <span class="expertise-tag">Arrays & Strings</span>
+                                    <span class="expertise-tag">Sorting & Searching</span>
+                                    <span class="expertise-tag">STL & Containers</span>
+                                    <span class="expertise-tag">Basic Mathematics</span>
+                                    <span class="expertise-tag">Bit Manipulation</span>
+                                </div>
+                            </div>
+                            <div class="expertise-category">
+                                <h4>Problem-Solving Techniques</h4>
+                                <div class="expertise-tags">
+                                    <span class="expertise-tag">Binary Search</span>
+                                    <span class="expertise-tag">Two Pointers</span>
+                                    <span class="expertise-tag">Sliding Window</span>
+                                    <span class="expertise-tag">Prefix Sums</span>
+                                    <span class="expertise-tag">Difference Arrays</span>
+                                    <span class="expertise-tag">Greedy Algorithms</span>
+                                    <span class="expertise-tag">Recursion & Backtracking</span>
+                                    <span class="expertise-tag">Coordinate Compression</span>
+                                </div>
+                            </div>
+                            <div class="expertise-category">
+                                <h4>Data Structures</h4>
+                                <div class="expertise-tags">
+                                    <span class="expertise-tag">Stack & Queue</span>
+                                    <span class="expertise-tag">Linked Lists</span>
+                                    <span class="expertise-tag">Sets & Maps</span>
+                                    <span class="expertise-tag">Priority Queue / Heap</span>
+                                    <span class="expertise-tag">Trees & Binary Trees</span>
+                                    <span class="expertise-tag">Disjoint Set Union (DSU)</span>
+                                    <span class="expertise-tag">Fenwick Tree</span>
+                                    <span class="expertise-tag">Segment Tree</span>
+                                </div>
+                            </div>
+                            <div class="expertise-category">
+                                <h4>Algorithms</h4>
+                                <div class="expertise-tags">
+                                    <span class="expertise-tag">Dynamic Programming</span>
+                                    <span class="expertise-tag">Graph Traversal (BFS/DFS)</span>
+                                    <span class="expertise-tag">Shortest Path Algorithms</span>
+                                    <span class="expertise-tag">Topological Sorting</span>
+                                    <span class="expertise-tag">Minimum Spanning Tree</span>
+                                    <span class="expertise-tag">Number Theory</span>
+                                    <span class="expertise-tag">Combinatorics</span>
+                                    <span class="expertise-tag">String Matching</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section education" aria-labelledby="education-title">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">Education</span>
+                    <h2 id="education-title" class="section-title">Academic Background</h2>
+                    <div class="section-divider" aria-hidden="true"></div>
+                </header>
+                <div class="education-timeline">
+                    <div class="timeline-line" aria-hidden="true"></div>
+                    <article class="education-item">
+                        <div class="education-marker" aria-hidden="true"></div>
+                        <div class="education-content">
+                            <div class="education-header">
+                                <h3>Bachelor of Science in Computer Science and Engineering</h3>
+                                <span class="education-period">2025 - 2029 (Expected)</span>
+                            </div>
+                            <p class="education-institution">University of Global Village</p>
+                            <p class="education-description">
+                                Pursuing a comprehensive degree in Computer Science and Engineering with focus on
+                                algorithms, data structures, software engineering, database systems, computer networks,
+                                and artificial intelligence. Maintaining a strong academic record with CGPA 3.83/4.00.
+                            </p>
+                            <div class="education-highlights">
+                                <span class="edu-highlight">CGPA: 3.83 / 4.00</span>
+                                <span class="edu-highlight">Dean's List</span>
+                                <span class="edu-highlight">Programming Club Member</span>
+                                <span class="edu-highlight">ACM ICPC Participant</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="education-item">
+                        <div class="education-marker" aria-hidden="true"></div>
+                        <div class="education-content">
+                            <div class="education-header">
+                                <h3>Higher Secondary Certificate (HSC)</h3>
+                                <span class="education-period">2023 - 2025</span>
+                            </div>
+                            <p class="education-institution">Science Group</p>
+                            <p class="education-description">
+                                Completed higher secondary education with focus on Physics, Chemistry, Mathematics,
+                                and Computer Science. Developed initial interest in programming and problem-solving.
+                            </p>
+                            <div class="education-highlights">
+                                <span class="edu-highlight">GPA: 4.84 / 5.00</span>
+                                <span class="edu-highlight">Science Fair Participant</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="education-item">
+                        <div class="education-marker" aria-hidden="true"></div>
+                        <div class="education-content">
+                            <div class="education-header">
+                                <h3>Secondary School Certificate (SSC)</h3>
+                                <span class="education-period">2021 - 2023</span>
+                            </div>
+                            <p class="education-institution">Science Group</p>
+                            <p class="education-description">
+                                Completed secondary education with strong foundation in Mathematics and Science.
+                                First introduction to computer basics and logical thinking.
+                            </p>
+                            <div class="education-highlights">
+                                <span class="edu-highlight">GPA: 5.00 / 5.00</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact" aria-labelledby="contact-title">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">Contact</span>
+                    <h2 id="contact-title" class="section-title">Get In Touch</h2>
+                    <div class="section-divider" aria-hidden="true"></div>
+                </header>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Let's Connect</h3>
+                        <p>
+                            I'm always open to discussing new projects, competitive programming,
+                            or potential collaborations. Feel free to reach out through any of the channels below.
+                        </p>
+                        <div class="contact-methods">
+                            <a href="https://github.com/rudro-debnath-for-real" target="_blank" rel="noopener noreferrer" class="contact-method">
+                                <div class="method-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </div>
+                                <div class="method-info">
+                                    <span class="method-label">GitHub</span>
+                                    <span class="method-value">rudro-debnath-for-real</span>
+                                </div>
+                            </a>
+                            <a href="https://codeforces.com/profile/rudro1866" target="_blank" rel="noopener noreferrer" class="contact-method">
+                                <div class="method-icon" aria-hidden="true">
+                                    <img src="photos/codeforces.svg" alt="Codeforces" class="method-logo-svg">
+                                </div>
+                                <div class="method-info">
+                                    <span class="method-label">Codeforces</span>
+                                    <span class="method-value">rudro1866</span>
+                                </div>
+                            </a>
+                            <a href="mailto:serenufa.ciba@ugv.edu.bd" class="contact-method">
+                                <div class="method-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="method-info">
+                                    <span class="method-label">Email</span>
+                                    <span class="method-value">serenufa.ciba@ugv.edu.bd</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/mgegkqzr" method="POST" novalidate>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your Name">
+                            <span class="form-error" aria-live="polite"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required autocomplete="email" placeholder="your@email.com">
+                            <span class="form-error" aria-live="polite"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="project">Project Inquiry</option>
+                                <option value="collaboration">Collaboration</option>
+                                <option value="competitive">Competitive Programming</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <span class="form-error" aria-live="polite"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required rows="5" placeholder="Your message..."></textarea>
+                            <span class="form-error" aria-live="polite"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary form-submit">
+                            <span class="btn-text">Send Message</span>
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                        <p class="form-note">Messages are sent directly to my email via Formspree.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">RD</span>
+                    <p>CSE Student | Competitive Programmer | Developer</p>
+                </div>
+                <nav class="footer-nav" aria-label="Footer navigation">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#competitive">Competitive</a>
+                    <a href="#education">Education</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <div class="footer-socials">
+                    <a href="https://github.com/rudro-debnath-for-real" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://codeforces.com/profile/rudro1866" target="_blank" rel="noopener noreferrer" aria-label="Codeforces">
+                        <img src="photos/codeforces.svg" alt="Codeforces" class="footer-logo-svg">
+                    </a>
+                    <a href="mailto:serenufa.ciba@ugv.edu.bd" aria-label="Email">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Rudro Debnath. Built with HTML, CSS & JavaScript.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
