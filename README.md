@@ -1,54 +1,99 @@
-# Rudro Debnath — combined portfolio
+# Rudro Debnath — Portfolio
 
-A single static portfolio built from the two original sites:
+[![Deploy static content to Pages](https://github.com/rudro-debnath-for-real/portfolio/actions/workflows/static.yml/badge.svg)](https://github.com/rudro-debnath-for-real/portfolio/actions/workflows/static.yml)
+[![Live site](https://img.shields.io/badge/Live-GitHub%20Pages-brightgreen)](https://rudro-debnath-for-real.github.io/portfolio/)
 
-- **Content / information** comes from the live site (`https://merudro.vercel.app/`): biography,
-  stats, skills and proficiency levels, three projects with their screenshots, competitive
-  programming profiles and expertise taxonomy, full education timeline, contact details and the
-  contact details.
-- **Design** combines both sites: the live site's animated grid hero, floating dots, scroll
-  progress bar, 3D code window, image-led project cards and detailed CP/education sections, plus
-  the local site's `<Rudro.dev/>` brand, status badge, terminal chrome and compilation footer,
-  glass cards, theme toggle, toast notifications and back-to-top button.
+A responsive, dependency-free personal portfolio for **Rudro Debnath** — CSE student, competitive programmer, and developer. The design combines the animated grid hero, project cards, and detailed competitive-programming sections of the original live site with the `<Rudro.dev/>` branding, terminal styling, theme toggle, and toast notifications of the earlier local redesign.
 
-The earlier redesign that already existed in the parent `Portfolio` folder was left untouched.
+**Live demo:** https://rudro-debnath-for-real.github.io/portfolio/
 
-## Live site
+---
 
-Deployed with GitHub Pages at:
-`https://rudro-debnath-for-real.github.io/portfolio/`
+## Contents
 
-Pushes to `main` trigger the existing `.github/workflows/static.yml` workflow, which publishes the
-repository root to GitHub Pages.
+- [Features](#features)
+- [Tech stack](#tech-stack)
+- [Highlights](#highlights)
+- [Project structure](#project-structure)
+- [Run locally](#run-locally)
+- [Deployment](#deployment)
+- [Contact form](#contact-form)
+- [Author](#author)
+
+## Features
+
+- **Hybrid visual design** — animated grid hero, floating dots, scroll progress, 3D code window, glass cards, and terminal chrome.
+- **Dark / light themes** — preference is remembered with `localStorage`.
+- **Fully responsive** — layouts adapt from desktop down to mobile, with a collapsible navigation menu.
+- **Detailed sections** — about, skills with proficiency levels, projects, competitive programming, education, and contact.
+- **Image-led project cards** — real screenshots for the Doctor Appointment System, Course Registration System, and Competitive Programming Code Library.
+- **Working contact flow** — submissions go to a published Google Form and trigger an automatic acknowledgement email to the sender.
+- **No build step** — plain HTML, CSS, and JavaScript; no package installation or runtime dependencies.
+
+## Tech stack
+
+| Layer | Technologies |
+| --- | --- |
+| Structure | HTML5, semantic markup, accessible labels |
+| Styling | CSS3, custom properties, Flexbox, Grid, responsive media queries |
+| Interaction | Vanilla JavaScript, IntersectionObserver, `localStorage` |
+| Forms | Google Forms, Google Apps Script, GmailApp |
+| Hosting | GitHub Pages via GitHub Actions |
+
+## Highlights
+
+- **2000+ problems solved** across competitive programming platforms.
+- **Codeforces:** [`rudro1866`](https://codeforces.com/profile/rudro1866)
+- **Selected projects:**
+  - Doctor Appointment Management System — Java, MySQL, Swing, JDBC
+  - University Course Registration System — Java, MySQL, Swing, JDBC
+  - Competitive Programming Code Library — C++, algorithms, data structures, templates
+
+## Project structure
+
+```text
+.
+├── .github/
+│   └── workflows/
+│       └── static.yml      # Builds and deploys the site to GitHub Pages
+├── assets/                 # Portrait, project screenshots, Codeforces logo
+│   ├── codeforces.svg
+│   ├── course.png
+│   ├── cpp-library1.png
+│   ├── doctor.jpg
+│   └── profile.jpg
+├── index.html              # Page structure and content
+├── styles.css              # Theme, layout, and responsive design
+├── script.js               # Theme, menu, animations, and form submission
+└── README.md               # This file
+```
 
 ## Run locally
 
-Open `index.html` directly, or serve this folder:
+Open `index.html` directly in a browser, or serve the folder:
 
 ```bash
 python -m http.server 8000
 ```
 
-Then visit `http://localhost:8000`.
+Then visit http://localhost:8000.
 
-## Files
+## Deployment
 
-| File | Purpose |
-| --- | --- |
-| `index.html` | All page content and structure (works without JavaScript) |
-| `styles.css` | Design tokens, dark/light themes, layout and responsive rules |
-| `script.js` | Theme toggle, mobile menu, typing text, counters, skill bars, scroll effects, form |
-| `assets/` | Portrait, project screenshots and Codeforces logo copied from the live site |
+The repository is configured for GitHub Pages with GitHub Actions as the source.
 
-## Notes
+1. Push changes to `main`.
+2. `.github/workflows/static.yml` runs automatically.
+3. The workflow uploads the repository root and deploys it to GitHub Pages.
 
-- The contact form posts into the owner's Google Form, **Portfolio Contact Form**
-  (`https://docs.google.com/forms/d/e/1FAIpQLSfhNGzKnxuEwxhkM_1gdvDm1qdZPmqodgmfghb13sQrZBk4ow/viewform`).
-  Responses appear under the form's **Responses** tab (and can be linked to a Google Sheet).
-  Google Forms does not allow cross-origin `fetch()`, so the site submits the form into a hidden
-  iframe after client-side validation; the visitor stays on the page.
+No manual deployment step is required. The live URL is:
+https://rudro-debnath-for-real.github.io/portfolio/
 
-### Google Form field mapping
+## Contact form
+
+The contact form posts directly to the published **Portfolio Contact Form** in Google Forms. Because Google Forms does not send CORS headers, the site submits into a hidden iframe instead of using `fetch()`, so visitors stay on the portfolio page.
+
+A Google Apps Script project named **Portfolio Form Autoreply** is bound to the form. Its installable *On form submit* trigger sends each submitter a confirmation email with their details and a note that a response will follow. Replies are routed to `serenufa.ciba@ugv.edu.bd`.
 
 | Website field | Google Forms entry |
 | --- | --- |
@@ -57,12 +102,11 @@ Then visit `http://localhost:8000`.
 | Subject | `entry.595121519` |
 | Message | `entry.525533560` |
 
-### Automatic confirmation email
+## Author
 
-A Google Apps Script named **Portfolio Form Autoreply** is bound to the form. Its installable
-`onFormSubmit` trigger sends each submitter a short acknowledgement from Rudro's Gmail; replies go
-to `serenufa.ciba@ugv.edu.bd`. The trigger is already installed, so no action is needed when the
-site is deployed.
+**Rudro Debnath**  
+CSE Student · Competitive Programmer · Developer
 
-- Theme choice is saved in `localStorage`.
-- No build step, no runtime dependencies; ready for GitHub Pages, Vercel or Netlify.
+- GitHub: [@rudro-debnath-for-real](https://github.com/rudro-debnath-for-real)
+- Codeforces: [rudro1866](https://codeforces.com/profile/rudro1866)
+- Email: [serenufa.ciba@ugv.edu.bd](mailto:serenufa.ciba@ugv.edu.bd)
