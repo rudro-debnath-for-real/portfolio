@@ -1,718 +1,286 @@
-/**
- * Rudro Debnath - Portfolio JavaScript
- * Handles navigation, theme toggle, animations, form validation, and interactive features
- */
-
-(function() {
+/* ==========================================================================
+   Rudro Debnath — combined portfolio interactions
+   ========================================================================== */
+(function () {
   'use strict';
 
-  // ==========================================================================
-  // DOM Elements Cache
-  // ==========================================================================
-  const elements = {
-    navbar: document.getElementById('navbar'),
-    navLinks: document.getElementById('navLinks'),
-    hamburger: document.getElementById('hamburger'),
-    themeToggle: document.getElementById('themeToggle'),
-    scrollProgress: document.getElementById('scrollProgress'),
-    backToTop: document.getElementById('backToTop'),
-    typingText: document.getElementById('typingText'),
-    contactForm: document.getElementById('contactForm'),
-    statValues: document.querySelectorAll('.stat-value[data-count]'),
-    cpStatValues: document.querySelectorAll('.cp-stat-value[data-count]'),
-    skillProgress: document.querySelectorAll('.skill-progress[data-progress]'),
-    sections: document.querySelectorAll('section[id]'),
-    navLinkItems: document.querySelectorAll('.nav-link[data-section]'),
-    projectCards: document.querySelectorAll('.project-card'),
-    educationItems: document.querySelectorAll('.education-item'),
-    animateElements: document.querySelectorAll('[class*="animate-"]')
-  };
+  const $ = (selector, scope = document) => scope.querySelector(selector);
+  const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ==========================================================================
-  // State
-  // ==========================================================================
-  const state = {
-    isScrolling: false,
-    lastScrollY: 0,
-    theme: 'dark',
-    animationsInitialized: false,
-    countersAnimated: false,
-    skillsAnimated: false
-  };
+  /* ---------- Footer year ---------- */
+  const yearEl = $('#current-year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  // ==========================================================================
-  // Theme Management
-  // ==========================================================================
-  function initTheme() {
-    // Check for saved theme preference or system preference
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme) {
-      state.theme = savedTheme;
-    } else if (!prefersDark) {
-      state.theme = 'light';
-    }
-
-    applyTheme(state.theme);
-  }
+  /* ---------- Theme toggle (persisted) ---------- */
+  const root = document.documentElement;
+  const themeToggle = $('#theme-toggle');
+  const themeMeta = $('meta[name="theme-color"]');
 
   function applyTheme(theme) {
-    state.theme = theme;
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-
-    // Update theme toggle aria-pressed
-    elements.themeToggle.setAttribute('aria-pressed', theme === 'light');
-  }
-
-  function toggleTheme() {
-    const newTheme = state.theme === 'dark' ? 'light' : 'dark';
-    applyTheme(newTheme);
-  }
-
-  // ==========================================================================
-  // Navigation
-  // ==========================================================================
-  function initNavigation() {
-    // Mobile menu toggle
-    elements.hamburger.addEventListener('click', toggleMobileMenu);
-
-    // Close mobile menu when clicking a link
-    elements.navLinkItems.forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (elements.navLinks.classList.contains('active') &&
-          !elements.navLinks.contains(e.target) &&
-          !elements.hamburger.contains(e.target)) {
-        closeMobileMenu();
-      }
-    });
-
-    // Smooth scroll for navigation links
-    elements.navLinkItems.forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (href.startsWith('#')) {
-          e.preventDefault();
-          const targetId = href.slice(1);
-          const targetElement = document.getElementById(targetId);
-          if (targetElement) {
-            scrollToElement(targetElement);
-            updateActiveNavLink(targetId);
-          }
-        }
-      });
-    });
-  }
-
-  function toggleMobileMenu() {
-    const isOpen = elements.navLinks.classList.toggle('active');
-    elements.hamburger.classList.toggle('active');
-    elements.hamburger.setAttribute('aria-expanded', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  }
-
-  function closeMobileMenu() {
-    elements.navLinks.classList.remove('active');
-    elements.hamburger.classList.remove('active');
-    elements.hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  function scrollToElement(element) {
-    const navHeight = elements.navbar.offsetHeight;
-    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-    const offsetPosition = elementPosition - navHeight;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
-  }
-
-  function updateActiveNavLink(activeId) {
-    elements.navLinkItems.forEach(link => {
-      const sectionId = link.getAttribute('data-section');
-      if (sectionId === activeId) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
-      }
-    });
-  }
-
-  // ==========================================================================
-  // Scroll Handling
-  // ==========================================================================
-  function initScrollHandling() {
-    let ticking = false;
-
-    function onScroll() {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
+    root.setAttribute('data-theme', theme);
+    if (themeMeta) themeMeta.setAttribute('content', theme === 'dark' ? '#0a0f1a' : '#f8fafc');
+    if (themeToggle) {
+      const toLight = theme === 'dark';
+      themeToggle.setAttribute('aria-label', toLight ? 'Switch to light theme' : 'Switch to dark theme');
+      themeToggle.setAttribute('aria-pressed', String(!toLight));
     }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  function handleScroll() {
-    const scrollY = window.pageYOffset;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrollY / docHeight) * 100;
+  let savedTheme = 'dark';
+  try { savedTheme = localStorage.getItem('rudro_theme') || 'dark'; } catch (e) { /* storage blocked */ }
+  applyTheme(savedTheme === 'light' ? 'light' : 'dark');
 
-    // Update scroll progress bar
-    elements.scrollProgress.style.transform = `scaleX(${scrollPercent / 100})`;
-    elements.scrollProgress.setAttribute('aria-valuenow', Math.round(scrollPercent));
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      try { localStorage.setItem('rudro_theme', next); } catch (e) { /* storage blocked */ }
+      showToast('Theme updated', 'Switched to ' + next + ' mode.', 'success');
+    });
+  }
 
-    // Show/hide back to top button
-    if (scrollY > 300) {
-      elements.backToTop.hidden = false;
-      // Force reflow for animation
-      requestAnimationFrame(() => {
-        elements.backToTop.classList.add('visible');
-      });
+  /* ---------- Mobile navigation ---------- */
+  const menuToggle = $('#menu-toggle');
+  const nav = $('#nav');
+  const backdrop = $('#nav-backdrop');
+
+  function setMenu(open) {
+    if (!menuToggle || !nav || !backdrop) return;
+    menuToggle.classList.toggle('is-open', open);
+    nav.classList.toggle('is-open', open);
+    backdrop.classList.toggle('is-open', open);
+    document.body.classList.toggle('menu-open', open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+  }
+
+  if (menuToggle) menuToggle.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
+  if (backdrop) backdrop.addEventListener('click', () => setMenu(false));
+  $$('.nav__link').forEach(link => link.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 900) setMenu(false); });
+
+  /* ---------- Typing greeting ---------- */
+  const typingEl = $('#typing-text');
+  if (typingEl) {
+    const phrases = ["Hello, I'm Rudro.", 'Building with C++ & Java.', 'Solving algorithms daily.', 'Welcome to my portfolio.'];
+    if (reduceMotion) {
+      typingEl.textContent = phrases[0];
     } else {
-      elements.backToTop.classList.remove('visible');
-      // Wait for transition before hiding
-      setTimeout(() => {
-        if (!elements.backToTop.classList.contains('visible')) {
-          elements.backToTop.hidden = true;
-        }
-      }, 300);
-    }
-
-    // Update active navigation link based on scroll position
-    updateActiveNavOnScroll();
-
-    // Trigger animations on scroll
-    triggerScrollAnimations();
-
-    state.lastScrollY = scrollY;
-  }
-
-  function updateActiveNavOnScroll() {
-    const navHeight = elements.navbar.offsetHeight;
-    const scrollY = window.pageYOffset + navHeight + 100;
-
-    elements.sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      const sectionId = section.getAttribute('id');
-
-      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-        updateActiveNavLink(sectionId);
+      let phrase = 0, char = 0, deleting = false;
+      function tick() {
+        const current = phrases[phrase];
+        char += deleting ? -1 : 1;
+        typingEl.textContent = current.slice(0, char);
+        let delay = deleting ? 55 : 95;
+        if (!deleting && char === current.length) { deleting = true; delay = 1900; }
+        else if (deleting && char === 0) { deleting = false; phrase = (phrase + 1) % phrases.length; delay = 420; }
+        window.setTimeout(tick, delay);
       }
-    });
-  }
-
-  // ==========================================================================
-  // Scroll Animations (Intersection Observer)
-  // ==========================================================================
-  function initScrollAnimations() {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px 0px -10% 0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animated');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    // Observe elements with animation classes
-    document.querySelectorAll('.section-header, .about-image, .about-text, .skill-category, .project-card, .cp-card, .education-item, .contact-info, .contact-form').forEach((el, index) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      el.style.transitionDelay = `${Math.min(index * 100, 500)}ms`;
-      observer.observe(el);
-    });
-
-    // Add animated class styles
-    const style = document.createElement('style');
-    style.textContent = `
-      .animated {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
-  function triggerScrollAnimations() {
-    // Counter animations for hero stats
-    if (!state.countersAnimated) {
-      const heroSection = document.getElementById('home');
-      const heroRect = heroSection.getBoundingClientRect();
-
-      if (heroRect.bottom > 0 && heroRect.top < window.innerHeight) {
-        animateCounters();
-        state.countersAnimated = true;
-      }
-    }
-
-    // Counter animations for CP stats
-    const cpSection = document.getElementById('competitive');
-    const cpRect = cpSection.getBoundingClientRect();
-
-    if (cpRect.top < window.innerHeight * 0.8 && cpRect.bottom > 0) {
-      if (!elements.cpStatValues[0].classList.contains('animated')) {
-        animateCpCounters();
-      }
-    }
-
-    // Skill progress bars
-    if (!state.skillsAnimated) {
-      const skillsSection = document.getElementById('skills');
-      const skillsRect = skillsSection.getBoundingClientRect();
-
-      if (skillsRect.top < window.innerHeight * 0.8 && skillsRect.bottom > 0) {
-        animateSkillBars();
-        state.skillsAnimated = true;
-      }
+      window.setTimeout(tick, 600);
     }
   }
 
-  // ==========================================================================
-  // Counter Animations
-  // ==========================================================================
-  function animateCounters() {
-    elements.statValues.forEach(stat => {
-      const target = parseFloat(stat.getAttribute('data-count'));
-      const isDecimal = target % 1 !== 0;
-      const duration = 2000;
-      const startTime = performance.now();
+  /* ---------- Scroll-triggered reveals, counters and skill bars ---------- */
+  const pendingReveals = new Set($$('.reveal'));
+  const pendingCounts = new Set($$('[data-count]'));
+  const pendingBars = new Set($$('.skill-bar > span'));
 
-      function updateCounter(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const easedProgress = easeOutCubic(progress);
-        const current = target * easedProgress;
-
-        if (isDecimal) {
-          stat.textContent = current.toFixed(2);
-        } else {
-          stat.textContent = Math.floor(current).toLocaleString();
-        }
-
-        if (progress < 1) {
-          requestAnimationFrame(updateCounter);
-        } else {
-          stat.textContent = isDecimal ? target.toFixed(2) : target.toLocaleString();
-        }
-      }
-
-      requestAnimationFrame(updateCounter);
-    });
-  }
-
-  function animateCpCounters() {
-    elements.cpStatValues.forEach(stat => {
-      const target = parseInt(stat.getAttribute('data-count'), 10);
-      const duration = 2000;
-      const startTime = performance.now();
-
-      function updateCounter(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const easedProgress = easeOutCubic(progress);
-        const current = Math.floor(target * easedProgress);
-
-        stat.textContent = current.toLocaleString() + (target >= 1000 ? '+' : '');
-
-        if (progress < 1) {
-          requestAnimationFrame(updateCounter);
-        } else {
-          stat.textContent = target.toLocaleString() + '+';
-        }
-      }
-
-      stat.classList.add('animated');
-      requestAnimationFrame(updateCounter);
-    });
-  }
-
-  function animateSkillBars() {
-    elements.skillProgress.forEach((bar, index) => {
-      const progress = bar.getAttribute('data-progress');
-      setTimeout(() => {
-        bar.style.width = `${progress}%`;
-      }, index * 100);
-    });
-  }
-
-  function easeOutCubic(t) {
-    return 1 - Math.pow(1 - t, 3);
-  }
-
-  // ==========================================================================
-  // Typing Animation
-  // ==========================================================================
-  function initTypingAnimation() {
-    const texts = [
-      'Hello, I\'m Rudro',
-      'Welcome to my portfolio',
-      'CSE Student | Developer',
-      'Problem Solver'
-    ];
-
-    let textIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 100;
-    let animationId = null;
-
-    function type() {
-      const currentText = texts[textIndex];
-
-      if (isDeleting) {
-        elements.typingText.textContent = currentText.substring(0, charIndex - 1);
-        charIndex--;
-        typingSpeed = 50;
-      } else {
-        elements.typingText.textContent = currentText.substring(0, charIndex + 1);
-        charIndex++;
-        typingSpeed = 100;
-      }
-
-      if (!isDeleting && charIndex === currentText.length) {
-        isDeleting = true;
-        typingSpeed = 2000; // Pause at end
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        textIndex = (textIndex + 1) % texts.length;
-        typingSpeed = 500; // Pause before next text
-      }
-
-      animationId = setTimeout(type, typingSpeed);
+  /* ---------- Animated counters ---------- */
+  function animateCount(el) {
+    const raw = el.getAttribute('data-count') || '';
+    const match = raw.match(/^(\d+)(.*)$/);
+    if (!match) { el.textContent = raw; return; }
+    const target = parseInt(match[1], 10);
+    const suffix = match[2] || '';
+    if (reduceMotion) { el.textContent = target + suffix; return; }
+    const duration = 1400;
+    const start = performance.now();
+    function frame(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(frame);
     }
-
-    // Start typing animation
-    setTimeout(type, 1000);
-
-    // Cleanup function for theme changes (if needed)
-    return () => {
-      if (animationId) {
-        clearTimeout(animationId);
-      }
-    };
+    requestAnimationFrame(frame);
   }
 
-  // ==========================================================================
-  // Back to Top
-  // ==========================================================================
-  function initBackToTop() {
-    elements.backToTop.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+  /* Runs on every scroll frame: reliable even after fast jumps or restored scroll positions. */
+  function checkInView() {
+    const limit = window.innerHeight - 24;
+    pendingReveals.forEach(el => {
+      if (el.getBoundingClientRect().top < limit) { el.classList.add('is-visible'); pendingReveals.delete(el); }
+    });
+    pendingCounts.forEach(el => {
+      if (el.getBoundingClientRect().top < limit) { animateCount(el); pendingCounts.delete(el); }
+    });
+    pendingBars.forEach(el => {
+      if (el.getBoundingClientRect().top < limit) {
+        el.style.width = (el.getAttribute('data-progress') || '0') + '%';
+        pendingBars.delete(el);
+      }
     });
   }
 
-  // ==========================================================================
-  // Contact Form Validation
-  // ==========================================================================
-  function initContactForm() {
-    const form = elements.contactForm;
+  /* ---------- Scroll progress, scroll spy, header & back-to-top ---------- */
+  const progress = $('#scroll-progress');
+  const header = $('#header');
+  const backToTop = $('#back-to-top');
+  const sections = $$('main section[id]');
+  const navLinks = $$('.nav__link');
+  let ticking = false;
+
+  function onScroll() {
+    const y = window.pageYOffset || document.documentElement.scrollTop;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(Math.max(y / max, 0), 1) : 0;
+
+    if (progress) {
+      progress.style.setProperty('--progress', pct.toFixed(4));
+      progress.setAttribute('aria-valuenow', String(Math.round(pct * 100)));
+    }
+    if (header) header.classList.toggle('is-scrolled', y > 40);
+    if (backToTop) backToTop.classList.toggle('is-visible', y > 500);
+
+    let currentId = '';
+    const offset = y + 140;
+    sections.forEach(section => { if (section.offsetTop <= offset) currentId = section.id; });
+    navLinks.forEach(link => {
+      const active = currentId !== '' && link.getAttribute('href') === '#' + currentId;
+      link.classList.toggle('is-active', active);
+      if (active) link.setAttribute('aria-current', 'true');
+      else link.removeAttribute('aria-current');
+    });
+    checkInView();
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive: true });
+  onScroll();
+
+  if (backToTop) {
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
+  }
+
+  /* ---------- Toast notifications ---------- */
+  const toastContainer = $('#toast-container');
+
+  function escapeHTML(str) {
+    return String(str).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  }
+
+  function showToast(title, message, type = 'success') {
+    if (!toastContainer) return;
+    const isError = type === 'error';
+    const toast = document.createElement('div');
+    toast.className = 'toast' + (isError ? ' toast--error' : '');
+    toast.setAttribute('role', isError ? 'alert' : 'status');
+    const icon = isError
+      ? '<path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>'
+      : '<path d="M20 6L9 17l-5-5"></path>';
+    toast.innerHTML =
+      '<span class="toast__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + icon + '</svg></span>' +
+      '<span><span class="toast__title">' + escapeHTML(title) + '</span><br><span class="toast__message">' + escapeHTML(message) + '</span></span>';
+    toastContainer.appendChild(toast);
+    window.setTimeout(() => {
+      toast.classList.add('is-leaving');
+      window.setTimeout(() => toast.remove(), 320);
+    }, 4500);
+  }
+
+  /* ---------- Contact form: validation + Google Forms submission ----------
+     Google Forms does not send CORS headers, so a fetch() cannot confirm the
+     result. The form posts normally into a hidden iframe; its load event tells
+     us Google answered, and the page stays exactly where the visitor is. */
+  const form = $('#contact-form');
+  if (form) {
+    const submitBtn = $('#submit-btn');
+    const btnText = $('.btn-text', submitBtn);
+    const responseFrame = $('#gform-response');
+    const originalLabel = btnText ? btnText.textContent : 'Send Message';
     const fields = {
-      name: document.getElementById('name'),
-      email: document.getElementById('email'),
-      subject: document.getElementById('subject'),
-      message: document.getElementById('message')
+      name: $('#name', form),
+      email: $('#email', form),
+      subject: $('#subject', form),
+      message: $('#message', form)
     };
+    let submitting = false;
 
-    // Real-time validation on blur
-    Object.values(fields).forEach(field => {
-      field.addEventListener('blur', () => validateField(field));
-      field.addEventListener('input', () => clearError(field));
+    function setError(input, message) {
+      const group = input.closest('.form-field');
+      const errorEl = $('#' + input.id + '-error', form);
+      if (group) group.classList.toggle('has-error', Boolean(message));
+      if (errorEl) errorEl.textContent = message || '';
+      input.setAttribute('aria-invalid', message ? 'true' : 'false');
+    }
+
+    function setLoading(loading) {
+      if (submitBtn) submitBtn.disabled = loading;
+      if (btnText) btnText.textContent = loading ? 'Sending…' : originalLabel;
+    }
+
+    Object.values(fields).forEach(input => {
+      if (!input) return;
+      input.addEventListener('input', () => setError(input, ''));
+      input.addEventListener('change', () => setError(input, ''));
     });
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (submitting) return;
+      let firstInvalid = null;
 
-      let isValid = true;
+      if (!fields.name.value.trim()) { setError(fields.name, 'Please enter your name.'); firstInvalid = firstInvalid || fields.name; }
+      else setError(fields.name, '');
 
-      Object.values(fields).forEach(field => {
-        if (!validateField(field)) {
-          isValid = false;
-        }
-      });
+      const email = fields.email.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError(fields.email, 'Please enter a valid email address.'); firstInvalid = firstInvalid || fields.email; }
+      else setError(fields.email, '');
 
-      if (isValid) {
-        handleFormSubmit(form, fields);
-      } else {
-        // Focus first invalid field
-        const firstInvalid = form.querySelector('.error');
-        if (firstInvalid) {
-          firstInvalid.focus();
-        }
+      if (!fields.subject.value) { setError(fields.subject, 'Please select a subject.'); firstInvalid = firstInvalid || fields.subject; }
+      else setError(fields.subject, '');
+
+      if (fields.message.value.trim().length < 10) { setError(fields.message, 'Please enter a message of at least 10 characters.'); firstInvalid = firstInvalid || fields.message; }
+      else setError(fields.message, '');
+
+      if (firstInvalid) {
+        firstInvalid.focus();
+        showToast('Check the form', 'Please correct the highlighted fields.', 'error');
+        return;
       }
-    });
-  }
 
-  function validateField(field) {
-    const errorElement = field.parentElement.querySelector('.form-error');
-    let isValid = true;
-    let errorMessage = '';
+      submitting = true;
+      setLoading(true);
+      let settled = false;
 
-    // Clear previous error
-    field.classList.remove('error');
-    if (errorElement) {
-      errorElement.textContent = '';
-    }
-
-    // Required field validation
-    if (field.hasAttribute('required') && !field.value.trim()) {
-      isValid = false;
-      errorMessage = `${getFieldLabel(field)} is required`;
-    }
-
-    // Email validation
-    if (field.type === 'email' && field.value.trim()) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(field.value.trim())) {
-        isValid = false;
-        errorMessage = 'Please enter a valid email address';
-      }
-    }
-
-    // Select validation
-    if (field.tagName === 'SELECT' && field.hasAttribute('required') && !field.value) {
-      isValid = false;
-      errorMessage = 'Please select a subject';
-    }
-
-    // Message length validation
-    if (field.name === 'message' && field.value.trim().length < 10) {
-      isValid = false;
-      errorMessage = 'Message must be at least 10 characters';
-    }
-
-    if (!isValid) {
-      field.classList.add('error');
-      if (errorElement) {
-        errorElement.textContent = errorMessage;
-      }
-    }
-
-    return isValid;
-  }
-
-  function clearError(field) {
-    field.classList.remove('error');
-    const errorElement = field.parentElement.querySelector('.form-error');
-    if (errorElement) {
-      errorElement.textContent = '';
-    }
-  }
-
-  function getFieldLabel(field) {
-    const label = field.parentElement.querySelector('label');
-    return label ? label.textContent : field.name;
-  }
-
-  async function handleFormSubmit(form, fields) {
-    const submitBtn = form.querySelector('.form-submit');
-    const originalText = submitBtn.querySelector('.btn-text').textContent;
-
-    // Show loading state
-    submitBtn.disabled = true;
-    submitBtn.querySelector('.btn-text').textContent = 'Sending...';
-    submitBtn.classList.add('loading');
-
-    try {
-      // Submit form via Formspree
-      const formData = new FormData(form);
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        showFormMessage(form, 'success', 'Thank you for your message! I\'ll get back to you soon.');
-        form.reset();
-      } else {
-        const data = await response.json();
-        if (data.errors) {
-          showFormMessage(form, 'error', data.errors.map(e => e.message).join(', '));
+      const finish = (ok) => {
+        if (settled) return;
+        settled = true;
+        submitting = false;
+        setLoading(false);
+        if (ok) {
+          form.reset();
+          Object.values(fields).forEach(input => setError(input, ''));
+          showToast('Message sent!', 'Saved to my Google Form — check your inbox for a confirmation.', 'success');
         } else {
-          showFormMessage(form, 'error', 'Something went wrong. Please try again later.');
+          showToast('Could not send message', 'Please email serenufa.ciba@ugv.edu.bd directly.', 'error');
         }
-      }
-    } catch (error) {
-      showFormMessage(form, 'error', 'Network error. Please check your connection and try again.');
-    } finally {
-      // Restore button
-      submitBtn.disabled = false;
-      submitBtn.querySelector('.btn-text').textContent = originalText;
-      submitBtn.classList.remove('loading');
-    }
-  }
+      };
 
-  function showFormMessage(form, type, message) {
-    // Remove existing message
-    const existingMessage = form.querySelector('.form-message');
-    if (existingMessage) {
-      existingMessage.remove();
-    }
-
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `form-message form-message-${type}`;
-    messageDiv.setAttribute('role', 'alert');
-    messageDiv.textContent = message;
-    messageDiv.style.cssText = `
-      padding: var(--space-3) var(--space-4);
-      border-radius: var(--radius-md);
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-medium);
-      margin-top: var(--space-4);
-      ${type === 'success'
-        ? 'background: rgba(16, 185, 129, 0.1); color: var(--color-success); border: 1px solid rgba(16, 185, 129, 0.2);'
-        : 'background: rgba(239, 68, 68, 0.1); color: var(--color-error); border: 1px solid rgba(239, 68, 68, 0.2);'
-      }
-    `;
-
-    form.appendChild(messageDiv);
-
-    // Auto-remove after 5 seconds
-    setTimeout(() => {
-      messageDiv.style.opacity = '0';
-      messageDiv.style.transition = 'opacity 0.3s ease';
-      setTimeout(() => messageDiv.remove(), 300);
-    }, 5000);
-  }
-
-  // ==========================================================================
-  // Project Card Interactions
-  // ==========================================================================
-  function initProjectCards() {
-    elements.projectCards.forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-8px)';
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
-  }
-
-  // ==========================================================================
-  // Keyboard Navigation
-  // ==========================================================================
-  function initKeyboardNavigation() {
-    document.addEventListener('keydown', (e) => {
-      // Escape key closes mobile menu
-      if (e.key === 'Escape' && elements.navLinks.classList.contains('active')) {
-        closeMobileMenu();
-        elements.hamburger.focus();
-      }
-
-      // Tab navigation in mobile menu
-      if (e.key === 'Tab' && elements.navLinks.classList.contains('active')) {
-        const focusableElements = elements.navLinks.querySelectorAll('a');
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-
-        if (e.shiftKey && document.activeElement === firstElement) {
-          e.preventDefault();
-          lastElement.focus();
-        } else if (!e.shiftKey && document.activeElement === lastElement) {
-          e.preventDefault();
-          firstElement.focus();
-        }
-      }
-    });
-  }
-
-  // ==========================================================================
-  // Performance Optimizations
-  // ==========================================================================
-  function initPerformanceOptimizations() {
-    // Reduce motion for users who prefer it
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (prefersReducedMotion.matches) {
-      document.documentElement.style.setProperty('--transition-fast', '0ms');
-      document.documentElement.style.setProperty('--transition-normal', '0ms');
-      document.documentElement.style.setProperty('--transition-slow', '0ms');
-      document.documentElement.style.setProperty('--transition-spring', '0ms');
-    }
-
-    // Listen for changes
-    prefersReducedMotion.addEventListener('change', (e) => {
-      if (e.matches) {
-        document.documentElement.style.setProperty('--transition-fast', '0ms');
-        document.documentElement.style.setProperty('--transition-normal', '0ms');
-        document.documentElement.style.setProperty('--transition-slow', '0ms');
-        document.documentElement.style.setProperty('--transition-spring', '0ms');
+      // Google's confirmation page loading in the hidden iframe means the POST arrived.
+      if (responseFrame) {
+        responseFrame.addEventListener('load', () => finish(true), { once: true });
       } else {
-        document.documentElement.style.removeProperty('--transition-fast');
-        document.documentElement.style.removeProperty('--transition-normal');
-        document.documentElement.style.removeProperty('--transition-slow');
-        document.documentElement.style.removeProperty('--transition-spring');
+        finish(true);
       }
+
+      window.setTimeout(() => finish(false), 12000);
+
+      // Native submit is required here: form.submit() skips this submit handler.
+      form.submit();
     });
-  }
-
-  // ==========================================================================
-  // Initialize All
-  // ==========================================================================
-  function init() {
-    // Initialize core features
-    initTheme();
-    initNavigation();
-    initScrollHandling();
-    initScrollAnimations();
-    initTypingAnimation();
-    initBackToTop();
-    initContactForm();
-    initProjectCards();
-    initKeyboardNavigation();
-    initPerformanceOptimizations();
-
-    // Event listeners
-    elements.themeToggle.addEventListener('click', toggleTheme);
-    elements.backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Handle resize
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        // Close mobile menu on resize to desktop
-        if (window.innerWidth > 768 && elements.navLinks.classList.contains('active')) {
-          closeMobileMenu();
-        }
-      }, 250);
-    });
-
-    console.log('Portfolio initialized successfully!');
-  }
-
-  // Start when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
   }
 })();
