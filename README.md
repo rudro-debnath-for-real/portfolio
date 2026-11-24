@@ -13,12 +13,19 @@ A single static portfolio built from the two original sites:
 
 The earlier redesign that already existed in the parent `Portfolio` folder was left untouched.
 
-## Run
+## Live site
 
-Open `index.html` directly, or serve the folder:
+Deployed with GitHub Pages at:
+`https://rudro-debnath-for-real.github.io/portfolio/`
+
+Pushes to `main` trigger the existing `.github/workflows/static.yml` workflow, which publishes the
+repository root to GitHub Pages.
+
+## Run locally
+
+Open `index.html` directly, or serve this folder:
 
 ```bash
-cd rudro-final
 python -m http.server 8000
 ```
 
